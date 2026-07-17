@@ -863,11 +863,26 @@ pub fn run() {
                         tauri::WindowEvent::Resized(size) => {
                             #[cfg(target_os = "windows")]
                             if size.width == 0 && size.height == 0 {
-                                let _ = window_clone.unminimize();
-                                let _ = window_clone.show();
+                                let w = window_clone.clone();
+                                std::thread::spawn(move || {
+                                    std::thread::sleep(std::time::Duration::from_millis(150));
+                                    let _ = w.unminimize();
+                                    let _ = w.show();
+                                });
                             }
                             #[cfg(not(target_os = "windows"))]
                             let _ = size;
+                        }
+                        tauri::WindowEvent::Minimized(minimized) => {
+                            #[cfg(target_os = "windows")]
+                            if *minimized {
+                                let w = window_clone.clone();
+                                std::thread::spawn(move || {
+                                    std::thread::sleep(std::time::Duration::from_millis(150));
+                                    let _ = w.unminimize();
+                                    let _ = w.show();
+                                });
+                            }
                         }
                         _ => {}
                     }
