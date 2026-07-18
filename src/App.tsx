@@ -1412,15 +1412,15 @@ function App() {
                     `conic-gradient(
                       from -42deg,
 
-                      #35df77 0deg,
+                      var(--ring-easy-fill) 0deg,
 
-                      #35df77
+                      var(--ring-easy-fill)
                       ${easyDegrees}deg,
 
-                      #173522
+                      var(--ring-easy-bg)
                       ${easyDegrees}deg,
 
-                      #173522 360deg
+                      var(--ring-easy-bg) 360deg
                     )`,
                 }}
               >
@@ -1437,15 +1437,15 @@ function App() {
                       `conic-gradient(
                         from -42deg,
 
-                        #f4c542 0deg,
+                        var(--ring-med-fill) 0deg,
 
-                        #f4c542
+                        var(--ring-med-fill)
                         ${mediumDegrees}deg,
 
-                        #443816
+                        var(--ring-med-bg)
                         ${mediumDegrees}deg,
 
-                        #443816 360deg
+                        var(--ring-med-bg) 360deg
                       )`,
                   }}
                 >
@@ -1462,15 +1462,15 @@ function App() {
                         `conic-gradient(
                           from -42deg,
 
-                          #ef5350 0deg,
+                          var(--ring-hard-fill) 0deg,
 
-                          #ef5350
+                          var(--ring-hard-fill)
                           ${hardDegrees}deg,
 
-                          #431b1b
+                          var(--ring-hard-bg)
                           ${hardDegrees}deg,
 
-                          #431b1b 360deg
+                          var(--ring-hard-bg) 360deg
                         )`,
                     }}
                   >
