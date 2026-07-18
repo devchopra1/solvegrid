@@ -53,9 +53,9 @@ body {
   --stats-border: 1px solid rgba(255, 255, 255, 0.5);
   --stats-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   
-  --cell-empty-bg: rgba(0, 0, 0, 0.04);
+  --cell-empty-bg: #f0f0f4;
   --cell-empty-shadow: none;
-  --cell-lvl1-bg: #9be9a8;
+  --cell-lvl1-bg: #a1f2b6;
   --cell-lvl2-bg: #40c463;
   --cell-lvl3-bg: #30a14e;
   
@@ -72,14 +72,14 @@ body {
   --title-color: #35df77;
 
   --ring-easy-fill: #35df77;
-  --ring-easy-bg: rgba(53, 223, 119, 0.15);
+  --ring-easy-bg: #edf2ed;
   --ring-med-fill: #f4c542;
-  --ring-med-bg: rgba(244, 197, 66, 0.15);
+  --ring-med-bg: #edf2ed;
   --ring-hard-fill: #ef5350;
-  --ring-hard-bg: rgba(239, 83, 80, 0.15);
+  --ring-hard-bg: #edf2ed;
   
-  --ring-border: 3px solid #ffffff;
-  --ring-core-bg: transparent;
+  --ring-border: 2px solid #ffffff;
+  --ring-core-bg: #edf2ed;
 }
 
 :root[data-theme="dark"] {
