@@ -37,27 +37,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
 
 // Theme Toggle Logic
 const themeToggle = document.getElementById('themeToggle');
-const htmlEl = document.documentElement;
+if (themeToggle) {
+    const htmlEl = document.documentElement;
 
-// Check for saved theme preference
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    htmlEl.setAttribute('data-theme', savedTheme);
-    themeToggle.innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        htmlEl.setAttribute('data-theme', savedTheme);
+        themeToggle.innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlEl.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlEl.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        themeToggle.innerText = newTheme === 'dark' ? '☀️' : '🌙';
+    });
 }
-
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlEl.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    htmlEl.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    
-    themeToggle.innerText = newTheme === 'dark' ? '☀️' : '🌙';
-});
-});
