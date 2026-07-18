@@ -24,6 +24,12 @@
     --pastel-pink: #692941;
 }
 
+[data-theme="dark"] body {
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -54,7 +60,7 @@ body {
 .brutal-btn {
     display: inline-block;
     background-color: var(--text-dark);
-    color: #ffffff;
+    color: var(--bg-light);
     font-family: var(--font-heading);
     text-transform: uppercase;
     text-decoration: none;
@@ -239,7 +245,7 @@ body {
 
 .card-header {
     background-color: var(--text-dark);
-    color: white;
+    color: var(--bg-light);
     padding: 12px 20px;
     display: flex;
     align-items: center;
