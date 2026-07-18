@@ -78,7 +78,7 @@ body {
   --ring-hard-fill: #ef5350;
   --ring-hard-bg: #edf2ed;
   
-  --ring-border: 2px solid #ffffff;
+  --ring-border: 3px solid #ffffff;
   --ring-core-bg: #edf2ed;
 }
 
@@ -405,6 +405,7 @@ body {
   border-radius: 50%;
 
   background: var(--ring-core-bg);
+  border: var(--ring-border);
 
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.04);
