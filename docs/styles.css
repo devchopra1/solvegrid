@@ -248,25 +248,37 @@ body {
     color: var(--bg-light);
     padding: 12px 20px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 12px;
-    font-family: monospace;
+    position: relative;
+    font-family: var(--font-main);
     font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .dots {
+    position: absolute;
+    left: 20px;
     display: flex;
-    gap: 6px;
+    gap: 8px;
 }
+
 .dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    border: 2px solid white;
 }
+
 .dot.red { background-color: #ff5f56; }
 .dot.yellow { background-color: #ffbd2e; }
 .dot.green { background-color: #27c93f; }
+
+/* Image Theme Toggling */
+[data-theme="dark"] .light-only { display: none !important; }
+[data-theme="dark"] .dark-only { display: block !important; }
+
+[data-theme="light"] .dark-only { display: none !important; }
+[data-theme="light"] .light-only { display: block !important; }
 
 /* The Actual Widget Replica inside the card */
 .widget-mockup {
