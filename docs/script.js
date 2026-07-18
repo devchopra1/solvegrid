@@ -53,6 +53,10 @@ if (themeToggle) {
     if (savedTheme) {
         htmlEl.setAttribute('data-theme', savedTheme);
         themeToggle.innerText = savedTheme === 'dark' ? '☀️' : '🌙';
+        const mockupImg = document.getElementById('widgetMockupImg');
+        if (mockupImg) {
+            mockupImg.src = savedTheme === 'dark' ? 'widget-dark.png' : 'widget-light.png';
+        }
     }
 
     themeToggle.addEventListener('click', () => {
@@ -63,5 +67,9 @@ if (themeToggle) {
         localStorage.setItem('theme', newTheme);
         
         themeToggle.innerText = newTheme === 'dark' ? '☀️' : '🌙';
+        const mockupImg = document.getElementById('widgetMockupImg');
+        if (mockupImg) {
+            mockupImg.src = newTheme === 'dark' ? 'widget-dark.png' : 'widget-light.png';
+        }
     });
 }
