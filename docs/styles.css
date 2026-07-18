@@ -14,6 +14,16 @@
     --font-cursive: 'Playfair Display', serif;
 }
 
+[data-theme="dark"] {
+    --bg-light: #121212;
+    --text-dark: #fcfcfc;
+    --pastel-blue: #235470;
+    --pastel-green: #375713;
+    --pastel-orange: #702f1a;
+    --pastel-purple: #482361;
+    --pastel-pink: #692941;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -67,8 +77,12 @@ body {
     box-shadow: var(--shadow-main);
 }
 
-.primary-btn:hover {
-    box-shadow: 0 0 0 var(--text-dark);
+.brutal-btn.icon-btn {
+    padding: 8px 12px;
+    font-size: 1.2rem;
+    box-shadow: 4px 4px 0px var(--text-dark);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
 }
 
 /* Navbar */
@@ -369,7 +383,7 @@ body {
 
 /* Mini Mockups */
 .mock-ui, .mock-window {
-    background: white;
+    background: var(--bg-light);
     border: var(--border-main);
     padding: 20px;
     box-shadow: 4px 4px 0px var(--text-dark);
@@ -386,7 +400,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    background: white;
+    background: var(--bg-light);
     border: var(--border-main);
     padding: 16px;
 }
@@ -430,7 +444,7 @@ body {
 /* Footer */
 .brutal-footer {
     background-color: var(--text-dark);
-    color: white;
+    color: var(--bg-light);
     padding: 60px 5% 20px;
     border-top: var(--border-main);
 }
@@ -447,7 +461,7 @@ body {
     gap: 24px;
 }
 .footer-links a {
-    color: white;
+    color: var(--bg-light);
     font-weight: 600;
     text-transform: uppercase;
     text-decoration: none;
