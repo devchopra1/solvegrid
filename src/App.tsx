@@ -917,7 +917,7 @@ function App() {
     */
 
     const menuHeight =
-      195;
+      170;
 
 
     /*

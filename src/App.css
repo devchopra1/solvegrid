@@ -839,7 +839,7 @@ body {
 
 .context-menu-item {
   width: 100%;
-  height: 38px;
+  height: 28px;
 
   display: flex;
   align-items: center;
@@ -857,7 +857,7 @@ body {
 
   background: transparent;
 
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 550;
 
   text-align: left;
@@ -880,7 +880,7 @@ body {
   height: 1px;
 
   margin:
-    4px 7px;
+    2px 7px;
 
   background: var(--menu-divider);
 }
