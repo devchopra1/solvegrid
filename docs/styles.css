@@ -416,6 +416,23 @@ body {
 .mg-cell.green-3 { background-color: #239a3b; }
 .mg-cell.green-4 { background-color: #196127; }
 
+/* Video Demo Section */
+.video-section {
+    padding: 80px 5%;
+}
+
+.video-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: var(--pastel-blue);
+}
+
+.video-container video {
+    display: block;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
 /* Download Section */
 .download-section {
     padding: 100px 5%;
