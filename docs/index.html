@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolveGrid - LeetCode on your Desktop</title>
+    <!-- Brutalist Typography Mix -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Epilogue:wght@400;600;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="brutal-nav">
+        <div class="nav-logo">SOLVEGRID</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="https://github.com/devchopra1/solvegrid" target="_blank">GitHub</a>
+        </div>
+        <a href="#download" class="brutal-btn nav-btn">Get the app</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <!-- Decorative Scribbles/Shapes -->
+        <div class="shape starburst">💥</div>
+        <div class="shape scribble-blue"></div>
+        <div class="shape scribble-yellow"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">
+                The <span class="accent-text">ultimate</span> tracker<br>
+                built for <span class="cursive-text">leetcoders.</span>
+            </h1>
+            <p class="hero-subtitle">Stop opening the browser just to check your streak. Native, beautiful, and completely silent.</p>
+            
+            <a href="#download" class="brutal-btn primary-btn">Download Now -></a>
+        </div>
+
+        <div class="hero-showcase">
+            <!-- Brutalist Container for the Widget -->
+            <div class="brutal-card pastel-blue widget-container">
+                <div class="card-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span>native-widget.exe</span>
+                </div>
+                
+                <!-- The Accurate Widget Mockup -->
+                <div class="widget-mockup">
+                    <div class="widget-header">
+                        <div class="widget-stats">
+                            <div class="widget-title">Progress</div>
+                            <div class="widget-numbers">
+                                <span class="num-solved">98</span><span class="num-total">/3,991</span>
+                            </div>
+                        </div>
+                        <div class="widget-rings">
+                            <div class="ring-track outer"><div class="ring-fill outer"></div></div>
+                            <div class="ring-track middle"><div class="ring-fill middle"></div></div>
+                            <div class="ring-track inner"><div class="ring-fill inner"></div></div>
+                        </div>
+                    </div>
+                    <div class="widget-heatmap" id="widgetHeatmap">
+                        <!-- JS generated heatmap -->
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <h2 class="section-title text-center">Ship quality code on day one.</h2>
+
+        <div class="feature-stack">
+            
+            <!-- Card 1 -->
+            <div class="brutal-card feature-row pastel-green">
+                <div class="feature-text">
+                    <h3>Never break your streak.</h3>
+                    <p>SolveGrid pulls your data silently in the background. Your latest submissions and daily streak are always right where you left them—on your wallpaper.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="mock-ui">
+                        <div class="ui-line bold">Last sync: Just now</div>
+                        <div class="ui-line">Status: Connected</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="brutal-card feature-row pastel-orange">
+                <div class="feature-text">
+                    <h3>Contribution Heatmap</h3>
+                    <p>A glorious 6-month view of your dedication. Perfectly matches the GitHub contribution style, so you feel right at home.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="mock-grid">
+                        <div class="mg-cell green-3"></div><div class="mg-cell green-1"></div><div class="mg-cell"></div><div class="mg-cell green-2"></div>
+                        <div class="mg-cell"></div><div class="mg-cell green-4"></div><div class="mg-cell"></div><div class="mg-cell green-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="brutal-card feature-row pastel-purple">
+                <div class="feature-text">
+                    <h3>Native & Frameless</h3>
+                    <p>Built with Rust & Tauri. It's not a clunky electron app—it's a featherweight, native desktop widget that respects your RAM.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="mock-window">
+                        <div class="mw-head"></div>
+                        <div class="mw-body">
+                            <span>0.1% CPU Usage</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <h2 class="section-title text-center">Ready to use everyday.</h2>
+        
+        <div class="download-grid" style="max-width: 600px;">
+            <div class="brutal-card pastel-blue text-center">
+                <h3>Windows</h3>
+                <p>Download the native .exe installer.</p>
+                <a href="SolveGrid_0.1.0_x64-setup.exe" download class="brutal-btn">Download Windows</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="brutal-footer">
+        <div class="footer-content">
+            <div class="nav-logo">SOLVEGRID</div>
+            <div class="footer-links">
+                <a href="https://github.com/devchopra1/solvegrid/blob/main/USER_GUIDE.md">User Guide</a>
+                <a href="https://github.com/devchopra1/solvegrid/issues">Report Issue</a>
+                <a href="https://github.com/devchopra1/solvegrid">Source Code</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Dev Chopra. Hand-coded with brutal honesty.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
