@@ -41,23 +41,22 @@ body {
 
 
 :root {
-  /* LIGHT MODE (Default) */
-  --text-primary: #111317;
-  --text-secondary: #6b7280;
+  /* LIGHT MODE (Default) - Frosted Glass iOS style */
+  --text-primary: #1c1c1e;
+  --text-secondary: #85858a;
   
-  --widget-bg: radial-gradient(circle at 18% 5%, rgba(255, 255, 255, 0.4), transparent 32%),
-               linear-gradient(145deg, rgba(255, 255, 255, 0.8) 0%, rgba(245, 245, 247, 0.85) 48%, rgba(235, 235, 240, 0.9) 100%);
-  --widget-border: 1px solid rgba(0, 0, 0, 0.08);
-  --widget-shadow: 0 24px 55px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --widget-bg: rgba(255, 255, 255, 0.95);
+  --widget-border: 1px solid rgba(255, 255, 255, 0.5);
+  --widget-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
   
-  --stats-bg: rgba(0, 0, 0, 0.03);
-  --stats-border: 1px solid rgba(0, 0, 0, 0.05);
-  --stats-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --stats-bg: rgba(255, 255, 255, 0.4);
+  --stats-border: 1px solid rgba(255, 255, 255, 0.5);
+  --stats-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   
-  --cell-empty-bg: #e5e7eb;
-  --cell-empty-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --cell-empty-bg: rgba(0, 0, 0, 0.04);
+  --cell-empty-shadow: none;
   
-  --menu-bg: rgba(245, 245, 247, 0.95);
+  --menu-bg: rgba(255, 255, 255, 0.95);
   --menu-border: 1px solid rgba(0, 0, 0, 0.1);
   --menu-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
   --menu-item-hover: rgba(0, 0, 0, 0.05);
@@ -67,53 +66,51 @@ body {
   --input-border: 1px solid rgba(0, 0, 0, 0.1);
   --secondary-btn-bg: rgba(0, 0, 0, 0.05);
   --secondary-btn-text: #4b5563;
-  --title-color: #168e49;
+  --title-color: #35df77;
 
   --ring-easy-fill: #35df77;
-  --ring-easy-bg: rgba(0, 0, 0, 0.08);
+  --ring-easy-bg: rgba(53, 223, 119, 0.15);
   --ring-med-fill: #f4c542;
-  --ring-med-bg: rgba(0, 0, 0, 0.08);
+  --ring-med-bg: rgba(244, 197, 66, 0.15);
   --ring-hard-fill: #ef5350;
-  --ring-hard-bg: rgba(0, 0, 0, 0.08);
+  --ring-hard-bg: rgba(239, 83, 80, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* DARK MODE */
-    --text-primary: #f4f4f5;
-    --text-secondary: #85858a;
-    
-    --widget-bg: radial-gradient(circle at 18% 5%, rgba(255, 255, 255, 0.045), transparent 32%),
-                 linear-gradient(145deg, rgba(27, 27, 29, 0.985) 0%, rgba(14, 14, 16, 0.99) 48%, rgba(6, 6, 7, 0.995) 100%);
-    --widget-border: 1px solid rgba(255, 255, 255, 0.14);
-    --widget-shadow: 0 24px 55px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.055);
-    
-    --stats-bg: rgba(255, 255, 255, 0.03);
-    --stats-border: 1px solid rgba(255, 255, 255, 0.05);
-    --stats-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.15);
-    
-    --cell-empty-bg: #28282d;
-    --cell-empty-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.018);
-    
-    --menu-bg: rgba(28, 28, 30, 0.98);
-    --menu-border: 1px solid rgba(255, 255, 255, 0.11);
-    --menu-shadow: 0 18px 45px rgba(0, 0, 0, 0.48);
-    --menu-item-hover: rgba(255, 255, 255, 0.075);
-    --menu-divider: rgba(255, 255, 255, 0.08);
-    
-    --input-bg: rgba(255, 255, 255, 0.055);
-    --input-border: 1px solid rgba(255, 255, 255, 0.1);
-    --secondary-btn-bg: rgba(255, 255, 255, 0.07);
-    --secondary-btn-text: #d6d6d8;
-    --title-color: #35df77;
+:root[data-theme="dark"] {
+  /* DARK MODE */
+  --text-primary: #f4f4f5;
+  --text-secondary: #85858a;
+  
+  --widget-bg: radial-gradient(circle at 18% 5%, rgba(255, 255, 255, 0.045), transparent 32%),
+               linear-gradient(145deg, rgba(27, 27, 29, 0.985) 0%, rgba(14, 14, 16, 0.99) 48%, rgba(6, 6, 7, 0.995) 100%);
+  --widget-border: 1px solid rgba(255, 255, 255, 0.14);
+  --widget-shadow: 0 24px 55px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  
+  --stats-bg: rgba(255, 255, 255, 0.03);
+  --stats-border: 1px solid rgba(255, 255, 255, 0.05);
+  --stats-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  --cell-empty-bg: #28282d;
+  --cell-empty-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.018);
+  
+  --menu-bg: rgba(28, 28, 30, 0.98);
+  --menu-border: 1px solid rgba(255, 255, 255, 0.11);
+  --menu-shadow: 0 18px 45px rgba(0, 0, 0, 0.48);
+  --menu-item-hover: rgba(255, 255, 255, 0.075);
+  --menu-divider: rgba(255, 255, 255, 0.08);
+  
+  --input-bg: rgba(255, 255, 255, 0.055);
+  --input-border: 1px solid rgba(255, 255, 255, 0.1);
+  --secondary-btn-bg: rgba(255, 255, 255, 0.07);
+  --secondary-btn-text: #d6d6d8;
+  --title-color: #35df77;
 
-    --ring-easy-fill: #35df77;
-    --ring-easy-bg: #173522;
-    --ring-med-fill: #f4c542;
-    --ring-med-bg: #443816;
-    --ring-hard-fill: #ef5350;
-    --ring-hard-bg: #431b1b;
-  }
+  --ring-easy-fill: #35df77;
+  --ring-easy-bg: #173522;
+  --ring-med-fill: #f4c542;
+  --ring-med-bg: #443816;
+  --ring-hard-fill: #ef5350;
+  --ring-hard-bg: #431b1b;
 }
 
 

@@ -253,6 +253,14 @@ function App() {
       return localStorage.getItem("solvegrid-last-updated");
     });
 
+  const [
+    themePreference,
+    setThemePreference,
+  ] =
+    useState<"system" | "light" | "dark">(() => {
+      return (localStorage.getItem("solvegrid-theme") as any) || "system";
+    });
+
 
   /*
     Stores the time of the most recent
@@ -281,6 +289,30 @@ function App() {
 
   const requestInProgress =
     useRef(false);
+
+
+  /* ======================================
+     APPLY THEME
+  ====================================== */
+
+  useEffect(() => {
+    function applyTheme() {
+      let activeTheme = themePreference;
+      if (activeTheme === "system") {
+        activeTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", activeTheme);
+    }
+    
+    applyTheme();
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const listener = () => {
+      if (themePreference === "system") applyTheme();
+    };
+    mediaQuery.addEventListener("change", listener);
+    return () => mediaQuery.removeEventListener("change", listener);
+  }, [themePreference]);
 
 
   /* ======================================
@@ -880,11 +912,11 @@ function App() {
 
     /*
       The menu is taller now because
-      Open LeetCode Profile was added.
+      Theme override was added.
     */
 
     const menuHeight =
-      155;
+      195;
 
 
     /*
@@ -1637,6 +1669,22 @@ function App() {
 
           </button>
 
+
+          {/* THEME TOGGLE */}
+          
+          <button
+            className="context-menu-item"
+            onClick={
+              () => {
+                const nextTheme = themePreference === "system" ? "light" : themePreference === "light" ? "dark" : "system";
+                setThemePreference(nextTheme);
+                localStorage.setItem("solvegrid-theme", nextTheme);
+                // We leave the menu open so they see the theme change
+              }
+            }
+          >
+            Theme: {themePreference.charAt(0).toUpperCase() + themePreference.slice(1)}
+          </button>
 
           <div
             className="context-menu-divider"
