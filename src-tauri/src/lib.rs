@@ -166,6 +166,65 @@ fn restore_window_position(window: &WebviewWindow) {
     }
 }
 
+use std::sync::atomic::{AtomicIsize, Ordering};
+static ORIGINAL_WNDPROC: AtomicIsize = AtomicIsize::new(0);
+
+#[cfg(target_os = "windows")]
+unsafe extern "system" fn custom_wndproc(hwnd: windows::Win32::Foundation::HWND, msg: u32, wparam: windows::Win32::Foundation::WPARAM, lparam: windows::Win32::Foundation::LPARAM) -> windows::Win32::Foundation::LRESULT {
+    use windows::Win32::UI::WindowsAndMessaging::{
+        WM_WINDOWPOSCHANGING, WINDOWPOS, SWP_NOMOVE, SWP_NOSIZE, SWP_HIDEWINDOW, SWP_SHOWWINDOW, 
+        WM_SYSCOMMAND, SC_MINIMIZE, CallWindowProcW, WNDPROC, DefWindowProcW
+    };
+    
+    if msg == WM_SYSCOMMAND {
+        if (wparam.0 as u32 & 0xFFF0) == SC_MINIMIZE {
+            return windows::Win32::Foundation::LRESULT(0); // Ignore minimize
+        }
+    }
+
+    if msg == WM_WINDOWPOSCHANGING {
+        let pos = &mut *(lparam.0 as *mut WINDOWPOS);
+        // Win+D minimizes windows by hiding them or moving them to -32000 (off-screen)
+        if (pos.flags.0 & SWP_HIDEWINDOW.0) != 0 || pos.x <= -32000 || pos.y <= -32000 {
+            pos.flags.0 &= !SWP_HIDEWINDOW.0;
+            pos.flags.0 |= SWP_SHOWWINDOW.0 | SWP_NOMOVE.0 | SWP_NOSIZE.0;
+        }
+    }
+    
+    let orig = ORIGINAL_WNDPROC.load(Ordering::SeqCst);
+    if orig != 0 {
+        let orig_ptr: WNDPROC = std::mem::transmute(orig);
+        CallWindowProcW(orig_ptr, hwnd, msg, wparam, lparam)
+    } else {
+        DefWindowProcW(hwnd, msg, wparam, lparam)
+    }
+}
+
+#[cfg(target_os = "windows")]
+fn stick_to_desktop(window: &tauri::WebviewWindow) {
+    if let Ok(hwnd) = window.hwnd() {
+        use windows::Win32::Foundation::HWND;
+        use windows::Win32::UI::WindowsAndMessaging::{
+            FindWindowExW, SetWindowLongPtrW, GWLP_HWNDPARENT, SetWindowPos, HWND_BOTTOM, SWP_NOMOVE, SWP_NOSIZE
+        };
+
+        unsafe {
+            let h = HWND(hwnd.0 as _);
+            let progman = FindWindowExW(HWND(std::ptr::null_mut()), HWND(std::ptr::null_mut()), windows::core::w!("Progman"), windows::core::PCWSTR::null()).unwrap_or(HWND(std::ptr::null_mut()));
+            
+            if progman.0 != std::ptr::null_mut() {
+                // Set Progman as the OWNER (not parent!). 
+                // This keeps it as a top-level window (fixing all transparency and click issues)
+                // but links it to the desktop so it survives Win+D!
+                SetWindowLongPtrW(h, GWLP_HWNDPARENT, progman.0 as isize);
+                
+                // Ensure it stays at the bottom of the top-level windows (just above desktop icons)
+                let _ = SetWindowPos(h, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+            }
+        }
+    }
+}
+
 #[cfg(target_os = "windows")]
 fn set_autostart<R: tauri::Runtime>(_app_handle: &tauri::AppHandle<R>, enable: bool) -> Result<(), String> {
     use winreg::enums::{HKEY_CURRENT_USER, KEY_SET_VALUE};
@@ -795,10 +854,10 @@ fn sync_settings<R: tauri::Runtime>(
         .ok_or_else(|| "Window not found".to_string())?;
 
     let (width, height) = match size.as_str() {
-        "small" => (360.0, 170.0),
-        "medium" => (420.0, 200.0),
-        "large" => (500.0, 240.0),
-        _ => (420.0, 200.0),
+        "small" => (350.0, 179.0),
+        "medium" => (418.0, 214.0),
+        "large" => (494.0, 253.0),
+        _ => (418.0, 214.0),
     };
 
     window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(width, height)))
@@ -848,6 +907,11 @@ pub fn run() {
                 let window = app.get_webview_window("main").unwrap();
                 restore_window_position(&window);
 
+                #[cfg(target_os = "windows")]
+                {
+                    stick_to_desktop(&window);
+                }
+
                 let args: Vec<String> = std::env::args().collect();
                 let is_silent = args.iter().any(|arg| arg == "--silent");
                 if !is_silent {
@@ -866,8 +930,19 @@ pub fn run() {
                                 let w = window_clone.clone();
                                 std::thread::spawn(move || {
                                     std::thread::sleep(std::time::Duration::from_millis(150));
+                                    if let Ok(hwnd) = w.hwnd() {
+                                        use windows::Win32::Foundation::HWND;
+                                        use windows::Win32::UI::WindowsAndMessaging::{
+                                            ShowWindow, SetWindowPos, SW_SHOWNOACTIVATE,
+                                            HWND_BOTTOM, SWP_NOMOVE, SWP_NOSIZE, SWP_NOACTIVATE
+                                        };
+                                        unsafe {
+                                            let h = HWND(hwnd.0 as _);
+                                            let _ = ShowWindow(h, SW_SHOWNOACTIVATE);
+                                            let _ = SetWindowPos(h, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                                        }
+                                    }
                                     let _ = w.unminimize();
-                                    let _ = w.show();
                                 });
                             }
                             #[cfg(not(target_os = "windows"))]
@@ -985,7 +1060,7 @@ pub fn run() {
                                 let _ = size_medium_c.set_checked(false);
                                 let _ = size_large_c.set_checked(false);
                                 if let Some(window) = app.get_webview_window("main") {
-                                    let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(360.0, 170.0)));
+                                    let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(350.0, 179.0)));
                                     let _ = window.emit("widget-size-changed", "small");
                                 }
                             }
@@ -994,7 +1069,7 @@ pub fn run() {
                                 let _ = size_medium_c.set_checked(true);
                                 let _ = size_large_c.set_checked(false);
                                 if let Some(window) = app.get_webview_window("main") {
-                                    let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(420.0, 200.0)));
+                                    let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(418.0, 214.0)));
                                     let _ = window.emit("widget-size-changed", "medium");
                                 }
                             }
@@ -1003,7 +1078,7 @@ pub fn run() {
                                 let _ = size_medium_c.set_checked(false);
                                 let _ = size_large_c.set_checked(true);
                                 if let Some(window) = app.get_webview_window("main") {
-                                    let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(500.0, 240.0)));
+                                    let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize::new(494.0, 253.0)));
                                     let _ = window.emit("widget-size-changed", "large");
                                 }
                             }

@@ -1,3 +1,4 @@
+
 import {
   FormEvent,
   MouseEvent,
@@ -303,7 +304,7 @@ function App() {
       }
       document.documentElement.setAttribute("data-theme", activeTheme);
     }
-    
+
     applyTheme();
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -1031,13 +1032,13 @@ function App() {
   const getScaleStyle = () => {
     switch (widgetSize) {
       case "small":
-        return { transform: "scale(0.473, 0.435)", transformOrigin: "top left" };
+        return { transform: "scale(0.46)", transformOrigin: "top left" };
       case "medium":
-        return { transform: "scale(0.552, 0.512)", transformOrigin: "top left" };
+        return { transform: "scale(0.55)", transformOrigin: "top left" };
       case "large":
-        return { transform: "scale(0.657, 0.615)", transformOrigin: "top left" };
+        return { transform: "scale(0.65)", transformOrigin: "top left" };
       default:
-        return { transform: "scale(0.552, 0.512)", transformOrigin: "top left" };
+        return { transform: "scale(0.55)", transformOrigin: "top left" };
     }
   };
 
@@ -1671,7 +1672,7 @@ function App() {
 
 
           {/* THEME TOGGLE */}
-          
+
           <button
             className="context-menu-item"
             onClick={

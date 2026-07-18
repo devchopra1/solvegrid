@@ -47,7 +47,7 @@ body {
   
   --widget-bg: rgba(255, 255, 255, 0.95);
   --widget-border: 1px solid rgba(255, 255, 255, 0.5);
-  --widget-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  --widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   
   --stats-bg: rgba(255, 255, 255, 0.4);
   --stats-border: 1px solid rgba(255, 255, 255, 0.5);
@@ -71,15 +71,15 @@ body {
   --secondary-btn-text: #4b5563;
   --title-color: #35df77;
 
-  --ring-easy-fill: #35df77;
-  --ring-easy-bg: #edf2ed;
-  --ring-med-fill: #f4c542;
-  --ring-med-bg: #edf2ed;
-  --ring-hard-fill: #ef5350;
-  --ring-hard-bg: #edf2ed;
+  --ring-easy-fill: #2ed158;
+  --ring-easy-bg: #eaf6ee;
+  --ring-med-fill: #ffcc00;
+  --ring-med-bg: #fff9db;
+  --ring-hard-fill: #ff3b30;
+  --ring-hard-bg: #fbecec;
   
-  --ring-border: 3px solid #ffffff;
-  --ring-core-bg: #edf2ed;
+  --ring-border: 0px solid transparent;
+  --ring-core-bg: rgba(255, 255, 255, 0.95);
 }
 
 :root[data-theme="dark"] {
@@ -90,7 +90,7 @@ body {
   --widget-bg: radial-gradient(circle at 18% 5%, rgba(255, 255, 255, 0.045), transparent 32%),
                linear-gradient(145deg, rgba(27, 27, 29, 0.985) 0%, rgba(14, 14, 16, 0.99) 48%, rgba(6, 6, 7, 0.995) 100%);
   --widget-border: 1px solid rgba(255, 255, 255, 0.14);
-  --widget-shadow: 0 24px 55px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  --widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
   
   --stats-bg: rgba(255, 255, 255, 0.03);
   --stats-border: 1px solid rgba(255, 255, 255, 0.05);
@@ -170,6 +170,9 @@ body {
   background: var(--widget-bg);
 
   box-shadow: var(--widget-shadow);
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 }
 
 .widget:active {
@@ -350,9 +353,6 @@ body {
     conic-gradient(from -42deg,
       #35df77 0deg 230deg,
       #173522 230deg 360deg);
-
-  box-shadow:
-    0 0 18px rgba(53, 223, 119, 0.08);
 }
 
 
@@ -370,9 +370,6 @@ body {
       #443816 175deg 360deg);
 
   border: var(--ring-border);
-
-  box-shadow:
-    0 0 14px rgba(244, 197, 66, 0.05);
 }
 
 
@@ -390,9 +387,6 @@ body {
       #431b1b 105deg 360deg);
 
   border: var(--ring-border);
-
-  box-shadow:
-    0 0 12px rgba(239, 83, 80, 0.05);
 }
 
 
@@ -406,9 +400,6 @@ body {
 
   background: var(--ring-core-bg);
   border: var(--ring-border);
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 
@@ -541,12 +532,6 @@ body {
 
 .level-3 {
   background: var(--cell-lvl3-bg);
-
-  box-shadow:
-    0 0 8px rgba(53,
-      223,
-      119,
-      0.14);
 }
 
 
